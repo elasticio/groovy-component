@@ -40,7 +40,7 @@ public class ExecuteGroovy implements Function {
             throw new IllegalStateException("Code is required");
         }
         final Binding binding = new Binding();
-        binding.setProperty("msg", parameters.getMessage());
+        binding.setProperty("parameters", parameters);
 
         final ImportCustomizer importCustomizer = new ImportCustomizer();
         importCustomizer.addStarImports(
@@ -58,11 +58,14 @@ public class ExecuteGroovy implements Function {
 
         final Script script = shell.parse(new StringReader(code.getString()));
 
-        final Message result = (Message) script.run();
+        final Object result = script.run();
 
-        logger.info("Emitting data");
+        if (result instanceof Message) {
 
-        // emitting the message to the platform
-        parameters.getEventEmitter().emitData(result);
+            logger.info("Emitting data");
+
+            // emitting the message to the platform
+            parameters.getEventEmitter().emitData((Message) result);
+        }
     }
 }

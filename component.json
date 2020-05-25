@@ -6,7 +6,7 @@
       "viewClass": "CodeFieldView",
       "label": "Code",
       "required": true,
-      "default": "// Please note only Groovy code is supported here."
+      "default": "// Please note only Groovy code is supported here.\ndef body = Json.createObjectBuilder().add(\"hello\", \"world\").build()\nnew Message.Builder().body(body).build()"
     }
   },
   "actions": {
