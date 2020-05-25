@@ -1,0 +1,23 @@
+{
+  "title": "Groovy Component",
+  "description": "Component to to execute Groovy dynamically at runtime",
+  "credentials": {
+    "fields": {
+      "code": {
+        "viewClass": "CodeFieldView",
+        "label": "Code",
+        "required": true,
+        "default": "// Please note only Groovy code is supported here."
+      }
+    }
+  },
+  "actions": {
+    "createPet": {
+      "main": "io.elastic.groovy.actions.ExecuteGroovy",
+      "title": "Execute Groovy",
+      "metadata": {
+        "out": {}
+      }
+    }
+  }
+}
