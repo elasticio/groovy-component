@@ -41,6 +41,7 @@ public class ExecuteGroovy implements Function {
         }
         final Binding binding = new Binding();
         binding.setProperty("parameters", parameters);
+        binding.setProperty("logger", logger);
 
         final ImportCustomizer importCustomizer = new ImportCustomizer();
         importCustomizer.addStarImports(
