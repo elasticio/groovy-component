@@ -52,22 +52,28 @@ class ExecuteGroovySpec extends Specification {
     def "should send requests using JAX-RS successfully"() {
 
         setup:
+        System.setProperty("ELASTICIO_API_USERNAME", "admin")
+        System.setProperty("ELASTICIO_API_KEY", "secret")
         def component = new ExecuteGroovy()
         def code = """
+        def token = '${System.getProperty("ELASTICIO_API_USERNAME")}:${System.getProperty("ELASTICIO_API_KEY")}'
         JsonObject pet = ClientBuilder.newClient()
                 .target('http://localhost:12345')
                 .path('v1/exec/result/55e5eeb460a8e2070000001e')
                 .request(MediaType.APPLICATION_JSON_TYPE)
+                .header("Authorization", "Basic " + Base64.getEncoder().encodeToString(token.getBytes("UTF-8")))
                 .get(JsonObject.class)
                 
         new Message.Builder().body(pet).build()
         """
+        println code
         def configuration = Json.createObjectBuilder().add("code", code).build()
         def parameters = new ExecutionParameters.Builder(message, emitter).configuration(configuration).build()
 
         driver.addExpectation(
                 onRequestTo("/v1/exec/result/55e5eeb460a8e2070000001e")
-                        .withMethod(ClientDriverRequest.Method.GET),
+                        .withMethod(ClientDriverRequest.Method.GET)
+                        .withBasicAuth("admin", "secret"),
                 giveResponse('{"status":"done"}', 'application/json')
                         .withStatus(200));
 

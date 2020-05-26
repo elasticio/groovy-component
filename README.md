@@ -44,10 +44,12 @@ The following code sends a request to an external REST API using [The JAX-RS cli
 The response is packed into a [Message](https://javadoc.io/doc/io.elastic/sailor-jvm/latest/io/elastic/api/Message.html) and emitted.
 
 ````java
+def token = '${System.getProperty("ELASTICIO_API_USERNAME")}:${System.getProperty("ELASTICIO_API_KEY")}'
 JsonObject result = ClientBuilder.newClient()
     .target('http://localhost:12345')
     .path('v1/objects/1')
     .request(MediaType.APPLICATION_JSON_TYPE)
+    .header("Authorization", "Basic " + Base64.getEncoder().encodeToString(token.getBytes("UTF-8")))
     .get(JsonObject.class)
                 
 new Message.Builder().body(result).build()
