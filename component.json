@@ -10,7 +10,7 @@
     }
   },
   "actions": {
-    "createPet": {
+    "executeGroovy": {
       "main": "io.elastic.groovy.actions.ExecuteGroovy",
       "title": "Execute Groovy",
       "metadata": {
