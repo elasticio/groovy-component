@@ -8,7 +8,7 @@ arbitrary Groovy code inside your integration flow.
 Here the list of the available variables within the context of execution. 
 
 ### Elastic.io Specific Functionality
-- `parameters` - an instance of (ExecutionParameters)[https://javadoc.io/doc/io.elastic/sailor-jvm/latest/io/elastic/api/ExecutionParameters.html] used to access the incoming message, step's configuration, step's snapshot or an instance of (EventEmitter)[https://javadoc.io/doc/io.elastic/sailor-jvm/latest/io/elastic/api/EventEmitter.html]]
+- `parameters` - an instance of [ExecutionParameters](https://javadoc.io/doc/io.elastic/sailor-jvm/latest/io/elastic/api/ExecutionParameters.html) used to access the incoming message, step's configuration, step's snapshot or an instance of [EventEmitter](https://javadoc.io/doc/io.elastic/sailor-jvm/latest/io/elastic/api/EventEmitter.html).
 - `logger` - an instance of [org.slf4j.Logger](http://www.slf4j.org/apidocs/org/slf4j/Logger.html) used to log inside the component
 
 ### Available Libraries
@@ -40,7 +40,7 @@ The following code emits two messages.
 
 ### Calling an external REST API
 
-The following code sends a request to an external REST API using The JAX-RS client API](https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/package-summary.html). 
+The following code sends a request to an external REST API using [The JAX-RS client API](https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/package-summary.html). 
 The response is packed into a [Message](https://javadoc.io/doc/io.elastic/sailor-jvm/latest/io/elastic/api/Message.html) and emitted.
 
 ````java
